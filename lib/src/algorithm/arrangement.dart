@@ -310,6 +310,16 @@ class Star with RegionItem {
 
   HuaQi? getHuaQi(TianGan tianGan) => HuaQi.generate(tianGan, this);
 
+  // 向心力
+  HuaQi? getCentripetalForce(Region oppositeRegion) {
+    return HuaQi.generate(oppositeRegion.tianGan, this);
+  }
+
+  // 離心力
+  HuaQi? getCentrifugalForce(Region region) {
+    return HuaQi.generate(region.tianGan, this);
+  }
+
   static int get count => Star.names.length;
 
   static int getZiWeiStartRegion(LunarBirth birth, WuXingJu wuxing) {
@@ -345,7 +355,7 @@ class Star with RegionItem {
       if (number == null) continue;
 
       Star star = Star(number);
-      star.setRegionNumber(startRegionNumber - i);
+      star.setRegionNumber(Region.abs(startRegionNumber - i));
 
       stars.add(star);
     }
@@ -435,17 +445,6 @@ class Star with RegionItem {
 
     return stars;
   }
-
-  /// should look up whole chart
-  ///
-  ///
-  // // 向心力
-  // HuaQi? getCentripetalForce(TianGan tianGanOnRegion) {}
-
-  // //離心力
-  // HuaQi? getCentrifugalForce(TianGan tianGanOnRegion) {
-  //   return HuaQi.from(tianGanOnRegion, this);
-  // }
 
   static List names = [
     '紫微', // 1
